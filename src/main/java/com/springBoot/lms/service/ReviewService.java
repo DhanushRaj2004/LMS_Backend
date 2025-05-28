@@ -33,15 +33,16 @@ public class ReviewService {
 
     public Review addReview(int learnerId, int courseId, Review review) {
         //fetch Learner by learner_id
-        Learner learner = learnerRepository.findById(learnerId)
-                .orElseThrow(() -> new ResourseNotFoundException("Learner Not found"));
-
-//        fetch Course by course_id
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new ResourseNotFoundException("Course Not found"));
+//        Learner learner = learnerRepository.findById(learnerId)
+//                .orElseThrow(() -> new ResourseNotFoundException("Learner Not found"));
+//
+////        fetch Course by course_id
+//        Course course = courseRepository.findById(courseId)
+//                .orElseThrow(() -> new ResourseNotFoundException("Course Not found"));
 
         //Check learner enrolled or not
-        LearnerCourse learnerCourse = learnerCourseRepository.getByJPQL(learnerId,courseId);
+        LearnerCourse learnerCourse = learnerCourseRepository.getByJPQL(learnerId,courseId)
+                .orElseThrow(() -> new ResourseNotFoundException("Learner didn't enrolled any course"));
 
         //Set LearnerCoure to review
         review.setLearnerCourse(learnerCourse);
