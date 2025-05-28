@@ -17,7 +17,7 @@ public interface LearnerCourseRepository extends JpaRepository<LearnerCourse,Int
 //    Optional<LearnerCourse> getByNativeQuery(int learnerId, int courseId);
 
     @Query("select lc from LearnerCourse lc where lc.learner.id = ?1 and lc.course.id = ?2")
-    Optional<LearnerCourse> getByJPQL(int learnerId,int courseId);
+    LearnerCourse getByJPQL(int learnerId,int courseId);
 
     @Query("select lc.learner from LearnerCourse lc where lc.course.id = ?1")
     List<Learner> getLearnerByCourseId(int courseId);
