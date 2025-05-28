@@ -55,7 +55,7 @@ public class LearnerCourseService {
 
     public List<Course> getCourseByLearner(int learnerId) {
         learnerCourseRepository.findById(learnerId)
-                .orElseThrow(() -> new ResourseNotFoundException("Learner not found"));
+                .orElseThrow(() -> new ResourseNotFoundException("Learner didn't enrolled any course"));
         return learnerCourseRepository.getCourseByLearner(learnerId);
     }
 }
