@@ -37,6 +37,7 @@ public class LearnerService {
         return learnerRepository.save(learner);
     }
 
+    //uyfkutdddddddddddd
     public List<Learner> getAll() {
          return learnerRepository.findAll();
     }
