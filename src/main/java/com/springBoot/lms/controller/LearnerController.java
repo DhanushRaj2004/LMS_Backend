@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -36,9 +37,16 @@ public class LearnerController {
         return ResponseEntity.status(HttpStatus.OK).body("Successfully Deleted");
     }
 
-    @GetMapping("learner/get/{id}")
-    public ResponseEntity<?> getLearner(@PathVariable int id){
-        return ResponseEntity.status(HttpStatus.OK).body(learnerService.getLearner(id));
+//    @GetMapping("learner/get/{id}")
+//    public ResponseEntity<?> getLearner(@PathVariable int id){
+//        return ResponseEntity.status(HttpStatus.OK).body(learnerService.getLearner(id));
+//    }
+
+    @GetMapping("learner/get")
+    public ResponseEntity<?> getLearnerByUser(Principal principal){
+        String username = principal.getName();
+
+        return ResponseEntity.status(HttpStatus.OK).body(learnerService.getLearnerByUser(username));
     }
 
     @PutMapping("learner/update/{id}")

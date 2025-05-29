@@ -1,10 +1,6 @@
 package com.springBoot.lms.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "learner")
@@ -16,6 +12,17 @@ public class Learner {
 
     private String name;
     private String contact;
+
+    @OneToOne
+    private NUser user;
+
+    public NUser getUser() {
+        return user;
+    }
+
+    public void setUser(NUser user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;
