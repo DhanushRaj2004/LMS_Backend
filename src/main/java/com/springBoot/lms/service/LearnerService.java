@@ -4,7 +4,6 @@ import com.springBoot.lms.exception.ResourseNotFoundException;
 import com.springBoot.lms.model.Learner;
 import com.springBoot.lms.model.NUser;
 import com.springBoot.lms.repository.LearnerRepository;
-import com.springBoot.lms.repository.NUserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
