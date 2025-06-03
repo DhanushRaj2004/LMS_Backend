@@ -27,8 +27,13 @@ public class SecurityConfig {
                 (authorize -> authorize
                         .requestMatchers("/api/user/signup").permitAll()
                         .requestMatchers("/api/user/get-token").authenticated()
+                        .requestMatchers("/api/user/details").authenticated()
                         .requestMatchers("/api/learner/add").permitAll()
                         .requestMatchers("/api/learner/get").hasAuthority("LEARNER")
+                        .requestMatchers("/api/author/add").permitAll()
+                        .requestMatchers("/api/course/get-all").permitAll()
+                        .requestMatchers("/api/course/add").hasAnyAuthority("AUTHOR","EXECUTIVE")
+                        .requestMatchers("/api/video/add/{module_id}").hasAnyAuthority("AUTHOR","EXECUTIVE")
                         .anyRequest().authenticated())
         )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

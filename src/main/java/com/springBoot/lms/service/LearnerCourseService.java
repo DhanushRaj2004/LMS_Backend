@@ -1,5 +1,6 @@
 package com.springBoot.lms.service;
 
+import com.springBoot.lms.dto.LearnerDto;
 import com.springBoot.lms.exception.ResourseNotFoundException;
 import com.springBoot.lms.model.Course;
 import com.springBoot.lms.model.Learner;
@@ -7,6 +8,7 @@ import com.springBoot.lms.model.LearnerCourse;
 import com.springBoot.lms.repository.CourseRepository;
 import com.springBoot.lms.repository.LearnerCourseRepository;
 import com.springBoot.lms.repository.LearnerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,6 +20,9 @@ public class LearnerCourseService {
     private LearnerRepository learnerRepository;
     private CourseRepository courseRepository;
     private LearnerCourseRepository learnerCourseRepository;
+
+    @Autowired
+    private LearnerDto learnerDto;
 
     public LearnerCourseService(LearnerRepository learnerRepository, CourseRepository courseRepository, LearnerCourseRepository learnerCourseRepository) {
         this.learnerRepository = learnerRepository;
@@ -46,11 +51,13 @@ public class LearnerCourseService {
     }
 
 
-    public List<Learner> getLearnerByCourseId(int courseId) {
+    public List<LearnerDto> getLearnerByCourseId(int courseId) {
 
         courseRepository.findById(courseId)
                 .orElseThrow(() -> new ResourseNotFoundException("Course id is invalid"));
-        return learnerCourseRepository.getLearnerByCourseId(courseId);
+
+        List<Learner> learner = learnerCourseRepository.getLearnerByCourseId(courseId);
+        return learnerDto.getLearnerDto(learner);
     }
 
     public List<Course> getCourseByLearner(int learnerId) {

@@ -43,4 +43,21 @@ public class NUserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
+
+    /*
+    * AIM : to get details based on logIn User role
+    * METHOD : GET
+    * Input : Principal interface to get logIn username
+    * Response : Based on role of the logzin user
+    */
+
+    @GetMapping("/details")
+    public Object getDetByUsername(Principal principal){
+        String username = principal.getName();
+
+        Object object = nUserService.getUserInfo(username);
+        return object;
+    }
+
+
 }

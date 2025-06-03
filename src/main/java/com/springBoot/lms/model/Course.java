@@ -2,6 +2,8 @@ package com.springBoot.lms.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "course")
 public class Course {
@@ -14,6 +16,17 @@ public class Course {
     private String courseTitle;
 
     private int credits;
+
+    @ManyToOne
+    private Author author;
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
 
     public int getId() {
         return id;
@@ -37,5 +50,17 @@ public class Course {
 
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return id == course.id && credits == course.credits && Objects.equals(courseTitle, course.courseTitle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, courseTitle, credits);
     }
 }
